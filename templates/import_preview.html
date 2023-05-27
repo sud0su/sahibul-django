@@ -1,0 +1,31 @@
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="file" accept=".xlsx,.xls" required>
+    <button type="submit">Preview</button>
+  </form>
+  
+  {% if error_message %}
+    <p>{{ error_message }}</p>
+  {% endif %}
+  
+  {% if preview_data %}
+  <h2>Import Preview:</h2>
+  <table>
+    <thead>
+      <tr>
+        {% for header in preview_data.headers %}
+          <th>{{ header }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in preview_data.dict %}
+        <tr>
+          {% for value in row.values %}
+            <td>{{ value }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}

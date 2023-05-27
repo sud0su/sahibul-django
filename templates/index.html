@@ -1,0 +1,98 @@
+{% extends "_base.html" %}
+
+{% block upload %}
+<section>
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:pt-16 lg:pb-5">
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Association Rule Mining</h1>
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">
+            Penggunaan Algoritma Apriori dan Algoritma K-Medoids Clustering pada warung kopi cutnun.
+        </p>
+        <div class="sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+            
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="w-full px-5 md:px-5">
+                <input name="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" accept=".xlsx,.xls" required>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">File yang dapat diunggah hanya file dengan format XLSX dan XLS</p>                  
+            </div> 
+            <br/>
+            
+            <div class="grid grid-col md:grid-cols-6 gap-4 px-5 md:px-0 text-left">
+                <div class="relative col-span-full">
+                    <div id="alert-additional-content-5" class="p-4 border border-gray-300 rounded-lg bg-gray-50 dark:border-gray-600 dark:bg-gray-800" role="alert">
+                        <div class="flex items-center">
+                          <svg aria-hidden="true" class="w-5 h-5 mr-2 text-gray-800 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                          <span class="sr-only">Info</span>
+                            <h3 class="text-lg font-medium text-gray-800 dark:text-gray-300">
+                                Minimum Support
+                            </h3>
+                        </div>
+                        <div class="mt-2 mb-4 text-sm text-gray-800 dark:text-gray-300">
+                            suatu ukuran atau nilai penunjang yang menunjukkan seberapa besar tingkat dominasi suatu item atau itemset dari keseluruhan transaksi berdasarkan persentase kombinasi item dalam database.
+                        </div>
+
+                        <div class="flex items-center">
+                            <svg aria-hidden="true" class="w-5 h-5 mr-2 text-gray-800 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                            <span class="sr-only">Info</span>
+                              <h3 class="text-lg font-medium text-gray-800 dark:text-gray-300">
+                                  Minimum Confidence
+                              </h3>
+                          </div>
+                            <div class="mt-2 mb-4 text-sm text-gray-800 dark:text-gray-300">
+                            suatu ukuran atau nilai yang menunjukkan kuatnya hubungan antar dua item dalam aturan asosiasi berdasarkan suatu kondisi tertentu.
+                            </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute inset-y-0 right-0 pt-8 pr-3 flex items-center pointer-events-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                        </svg>
+                    </div>
+                    <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Minimum Support</label>
+                    <input required name="support" type="text" id="default-input" value="14" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-y-0 right-0 pt-8 pr-3 flex items-center pointer-events-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                        </svg>
+                    </div>
+                    <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Minimum Confidence</label>
+                    <input required name="confidence" type="text" id="default-input" value="80" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                <div class="relative col-span-2">
+                    <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Procces Data</label>
+                    <button type="submit" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2 w-full">
+                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" fill="#ffffff" stroke="currentColor" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M240,0C107.664,0,0,107.664,0,240s107.664,240,240,240s240-107.664,240-240S372.336,0,240,0z M240,460 c-121.309,0-220-98.691-220-220S118.691,20,240,20s220,98.691,220,220S361.309,460,240,460z"></path> 
+                            <path d="M410,194.999h-27.058c-2.643-8.44-6-16.56-10.03-24.271l19.158-19.158c3.776-3.775,5.854-8.79,5.854-14.121 c0-5.332-2.08-10.347-5.854-14.121l-35.399-35.399c-3.775-3.775-8.79-5.854-14.122-5.854c-5.331,0-10.346,2.079-14.121,5.854 l-19.158,19.158c-7.711-4.03-15.832-7.386-24.271-10.03V70c0-11.028-8.972-20-20-20h-50c-11.028,0-20,8.972-20,20v27.058 c-8.44,2.643-16.56,6-24.271,10.03L151.57,87.93c-3.775-3.776-8.79-5.854-14.121-5.854c-5.332,0-10.347,2.08-14.121,5.854 l-35.399,35.399c-3.775,3.775-5.854,8.79-5.854,14.122c0,5.331,2.079,10.346,5.854,14.121l19.158,19.158 c-4.03,7.711-7.386,15.832-10.03,24.271H70c-11.028,0-20,8.972-20,20v50c0,11.028,8.972,20,20,20h27.057 c2.643,8.44,6,16.56,10.03,24.271L87.929,328.43c-3.776,3.775-5.854,8.79-5.854,14.121c0,5.332,2.08,10.347,5.854,14.121 l35.399,35.399c3.775,3.775,8.79,5.854,14.122,5.854c5.331,0,10.346-2.079,14.121-5.854l19.158-19.158 c7.711,4.03,15.832,7.386,24.271,10.03V410c0,11.028,8.972,20,20,20h50c11.028,0,20-8.972,20.001-20v-27.058 c8.44-2.643,16.56-6,24.271-10.03l19.158,19.158c3.775,3.776,8.79,5.854,14.121,5.854c5.332,0,10.347-2.08,14.121-5.854 l35.399-35.399c3.775-3.775,5.854-8.79,5.854-14.122c0-5.331-2.079-10.346-5.854-14.121l-19.158-19.158 c4.03-7.711,7.386-15.832,10.03-24.271H410c11.028,0,20-8.972,20-20v-50C430,203.971,421.028,194.999,410,194.999z M410,264.998 h-34.598c-4.562,0-8.544,3.086-9.684,7.503c-3.069,11.901-7.716,23.133-13.813,33.387c-2.337,3.931-1.71,8.948,1.524,12.182 l24.5,24.457l-35.357,35.4l-24.5-24.5c-3.236-3.235-8.253-3.86-12.182-1.524c-10.254,6.097-21.487,10.745-33.387,13.813 c-4.417,1.14-7.503,5.122-7.503,9.684V410h-50v-34.599c0-4.562-3.086-8.544-7.503-9.684 c-11.901-3.069-23.133-7.716-33.387-13.813c-1.587-0.944-3.353-1.404-5.107-1.404c-2.586,0-5.147,1.002-7.073,2.931l-24.457,24.5 l-35.4-35.357l24.5-24.5c3.234-3.235,3.861-8.251,1.524-12.182c-6.097-10.254-10.745-21.487-13.813-33.387 c-1.14-4.417-5.122-7.503-9.684-7.503H70v-50h34.596c4.562,0,8.544-3.086,9.684-7.503c3.069-11.901,7.716-23.133,13.813-33.387 c2.337-3.931,1.71-8.948-1.524-12.182l-24.5-24.457l35.357-35.4l24.5,24.5c3.236,3.235,8.253,3.861,12.182,1.524 c10.254-6.097,21.487-10.745,33.387-13.813c4.417-1.14,7.503-5.122,7.503-9.684V70h50v34.596c0,4.562,3.086,8.544,7.503,9.684 c11.901,3.069,23.133,7.716,33.387,13.813c3.929,2.337,8.947,1.709,12.182-1.524l24.457-24.5l35.4,35.357l-24.5,24.5 c-3.234,3.235-3.861,8.251-1.524,12.182c6.097,10.254,10.745,21.487,13.813,33.387c1.14,4.417,5.122,7.503,9.684,7.503H410 V264.998z"></path> 
+                            <path d="M331.585,292.475l-40-35l-13.17,15.051L298.386,290H240c-27.57,0-50-22.43-50-50h-20c0,38.598,31.402,70,70,70h58.386 l-19.971,17.475l13.17,15.051l40-35c2.17-1.898,3.415-4.642,3.415-7.525S333.755,294.373,331.585,292.475z"></path> 
+                            <path d="M201.585,207.473L181.614,190H240c27.57,0,50,22.43,50,50h20c0-38.598-31.402-70-70-70h-58.386l19.971-17.475 l-13.17-15.051l-40,35c-2.17,1.898-3.415,4.642-3.415,7.525s1.245,5.627,3.415,7.525l40,35L201.585,207.473z"></path>
+                        </svg>
+                        Analisa Data Yang Telah Diunggah
+                      </button>
+                </div>
+                <div class="relative col-span-2">
+                    {% if error_message %}
+                        <p>{{ error_message }}</p>
+                    {% endif %}
+
+                    {% comment %} <div class="flex justify-between mb-1">
+                        <span class="text-base font-medium text-blue-700 dark:text-white">Loading...</span>
+                        <span class="text-sm font-medium text-blue-700 dark:text-white">45%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-lg h-10 dark:bg-gray-700">
+                        <div class="bg-blue-600 h-10 rounded-lg" style="width: 45%"></div>
+                    </div> {% endcomment %}
+                </div>
+
+            </div>
+
+        </form>
+
+        </div>
+    </div>
+</section>
+{% endblock upload %}

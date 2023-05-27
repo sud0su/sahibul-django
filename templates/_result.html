@@ -1,0 +1,142 @@
+{% extends "_base.html" %}
+{% load pandas_tag %}
+
+
+{% block tabs_algoritma %}
+<div class="border-t border-gray-300"></div>
+<div class="border-b border-gray-200 dark:border-gray-700">
+    <ul class="flex flex-wrap -mb-px text-sm font-medium justify-center text-center text-gray-500 dark:text-gray-400" id="tabs">
+        <li class="mr-2">
+            <a href="#first" class="inline-flex p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group">
+                <svg aria-hidden="true" class="w-5 h-5 mr-2 text-blue-600 dark:text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                    </path>
+                </svg>
+                Data yang diunggah
+            </a>
+        </li>
+        <li class="mr-2">
+            <a href="#second" class="inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                    <svg aria-hidden="true" class="w-5 h-5 mr-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                        </path>
+                    </svg>
+                    Hasil dari Algoritma Apriori
+            </a>
+        </li>
+        <li class="mr-2">
+            <a href="#third" class="inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                <svg aria-hidden="true" class="w-5 h-5 mr-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                    </path>
+                </svg>
+                Hasil dari Algoritma K-Medoids Clustering
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div id="tab-contents">
+    <div id="first" class="p-4">
+        
+        {% if preview_data %}
+        <table id="tabfirst" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    {% for header in preview_data.headers %}
+                    <th scope="col" class="px-6 py-3">{{ header }}</th>
+                {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in preview_data.dict %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                {% for value in row.values %}
+                    <td class="px-6 py-4">{{ value }}</td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+    </div>
+    <div id="second" class="hidden p-4">
+
+        <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+            <b>Cara Baca Hasil :</b>
+            <p>
+                Kesimpulan yang dapat diambil dari penerapan Association Rule menggunakan Algoritma Apriori dengan <b>Minimum Support {{support}}%</b> 
+                dan <b>Minimum Confidence {{confidence}}%</b> dari hasil percobaan 
+                dengan menggunakan menggunakan pemrograman python dari {{preview_data|length}} data transaksi penjualan adalah sebagai berikut ini :
+            </p>
+            <ul>
+                <li>
+                    Jika membeli Alat Linting Kecil Regular maka akan juga membeli Buffalo Baret dengan memiliki confidence atau tingkat kepercayaan sebesar 83.33%.
+                </li>
+                <li>
+                    Jika membeli Lem V-tro kecil 10gr maka akan juga membeli Buffalo Baret dengan memiliki confidence atau tingkat kepercayaan sebesar 88.0%.
+                </li>
+            </ul>
+        </div>
+
+        <br />
+        
+        <table id="tabsecond" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                {{ result_apriori | convert_data_frame_to_html_table_headers | safe}}
+            </thead>
+            <tbody>
+                {{result_apriori | convert_data_frame_to_html_table_rows | safe}}
+            </tbody>
+        </table>
+
+    </div>
+    <div id="third" class="hidden p-4">
+      Third tab
+    </div>
+</div>
+{% endblock tabs_algoritma %}
+
+{% block extra_script %}
+<script type="text/javascript">
+    let tabsContainer = document.querySelector("#tabs");
+    let tabTogglers = tabsContainer.querySelectorAll("#tabs a");
+
+    tabTogglers.forEach(function(toggler) {
+        toggler.addEventListener("click", function(e) {
+            e.preventDefault();
+
+            let tabName = this.getAttribute("href");
+            let tabContents = document.querySelector("#tab-contents");
+
+            for (let i = 0; i < tabContents.children.length; i++) {
+                
+                tabTogglers[i].className = "";  
+                tabTogglers[i].children[0].className.baseVal = "";
+                
+                tabTogglers[i].classList.add("inline-flex","p-4","border-b-2","border-transparent","rounded-t-lg","hover:text-gray-600","hover:border-gray-300","dark:hover:text-gray-300","group");  
+                tabTogglers[i].children[0].classList.add("w-5","h-5","mr-2","text-gray-400","group-hover:text-gray-500","dark:text-gray-500","dark:group-hover:text-gray-300")
+                
+                tabContents.children[i].classList.remove("hidden");
+                if ("#" + tabContents.children[i].id === tabName) {
+                    continue;
+                }
+                tabContents.children[i].classList.add("hidden");
+            }
+            
+            e.target.className = "";  
+            e.target.children[0].className.baseVal = "";
+            e.target.classList.add("inline-flex","p-4","text-blue-600","border-b-2","border-blue-600","rounded-t-lg","active","dark:text-blue-500","dark:border-blue-500","group");
+            e.target.children[0].classList.add("w-5","h-5","mr-2","text-blue-600","dark:text-blue-500");
+
+        })
+    })
+
+    $(document).ready(function () {
+        $('#tabfirst').DataTable();
+        $('#tabsecond').DataTable();
+    });
+
+</script>
+{% endblock extra_script %}
