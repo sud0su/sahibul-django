@@ -9,9 +9,14 @@ from tablib import Dataset
 # import pandas as pd
 
 
-def home(request):
-    return render(request, 'index.html')
+def tentang(request):
+    return render(request, 'tentang.html')
 
+def bantuan(request):
+    return render(request, 'bantuan.html')
+
+def contact(request):
+    return render(request, 'kontak.html')
 
 class ImportPreviewView(View):
     def get(self, request):

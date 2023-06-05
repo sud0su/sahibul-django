@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block upload %}
+<section>
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:pt-16 lg:pb-5">
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Bantuan</h1>
+        <p class="mb-8 text-lg font-normal dark:text-white text-gray-500 lg:text-xl sm:px-16 lg:px-48">
+            Association Rule Mining - Penggunaan Algoritma Apriori pada warung kopi cutnun.
+        </p>
+    </div>
+    <div class="justify-left space-y-2 space-x-10 px-6">
+        <p>Website ini dibangun dengan dukungan dua mode tampilan yang dapat diakses sesuai dengan kenyamanan pengguna website. Pada halaman ini,  pengguna hanya perlu menunggah file frequentitemset yang telah disediakan dengan format  sebagai berikut</p>
+        <img src="{% static 'img/1.png' %}" class="h-full" alt="Format Tabel Excel" />
+        <p>
+            Selanjutnya, pengguna akan diminta untuk menentukan nilai minimum support dan minimum confidence yang akan digunakan dalam analisis menggunakan algoritma Apriori. Pada Gambar 4.3, terdapat beberapa langkah yang perlu diikuti.
+            <ul>
+                <li>Nomor 1 menunjukkan form upload yang hanya mendukung file dengan format xlsx dan xls. File tersebut harus mengikuti format data yang ditunjukkan pada Gambar dibawah berikut</li>
+                <li>Nomor 2 merupakan form pengisian nilai minimum support. Secara default, nilai minimum support sudah terisi dengan angka 14, namun pengguna dapat mengubahnya sesuai dengan kebutuhan analisis yang ingin dilakukan.</li>
+                <li>Nomor 3 adalah form pengisian nilai minimum confidence. Nilai ini juga sudah terisi secara default dengan angka 80, namun pengguna dapat mengubahnya sesuai dengan kebutuhan mereka</li>
+            </ul>
+        </p>
+        <img src="{% static 'img/2.png' %}" class="h-full" alt="Format Tabel Excel" />
+        <p>
+        Dengan mengisi form-form tersebut, pengguna dapat mengatur parameter analisis yang sesuai dengan kebutuhan mereka. Hal ini memberikan fleksibilitas dan kontrol kepada pengguna dalam menentukan tingkat kepentingan item-item dalam aturan asosiasi yang akan dihasilkan.
+        </p>
+    </div>
+</section>
+{% endblock upload %}

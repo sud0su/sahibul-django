@@ -17,10 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from algoritma.views import ImportPreviewView
+from algoritma.views import ImportPreviewView, tentang, bantuan, contact
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('tentang/', tentang ,name='tentang'),
+    path('bantuan/', bantuan ,name='bantuan'),
+    path('kontak/', contact ,name='contact'),
     path("__reload__/", include("django_browser_reload.urls")),
     path('', ImportPreviewView.as_view(), name='import-preview'),
 
