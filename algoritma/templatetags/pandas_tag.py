@@ -2,6 +2,15 @@ from django import template
 
 register = template.Library()
 
+def get_data_head(df):
+    html = ""
+    for row in df.values:
+        for value in row:
+            dtsplit = value.split(' -> ')
+            if len(dtsplit) > 1:
+                html += f"<li>Jika membeli {dtsplit[0][2:-2]} maka akan juga membeli {dtsplit[1][2:-2]} dengan memiliki confidence atau tingkat kepercayaan sebesar {row[2]}.</li>"
+    return html
+
 def convert_data_frame_to_html_table_headers(df):
     html = "<tr>"
     for col in df.columns:
@@ -19,5 +28,6 @@ def convert_data_frame_to_html_table_rows(df):
         html += row_html
     return html
 
+register.filter("get_data_head", get_data_head)
 register.filter("convert_data_frame_to_html_table_rows", convert_data_frame_to_html_table_rows)
 register.filter("convert_data_frame_to_html_table_headers", convert_data_frame_to_html_table_headers)

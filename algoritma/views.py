@@ -38,10 +38,12 @@ class ImportPreviewView(View):
         # resource = PenjualanResource()
         preview_data = dataset.load(file.read(), format=file_format)
 
-        # print(preview_data['Nama produk'])
-        # preview_data.headers = dataset.headers[:10]  # Get the headers for preview
+        if ['Tanggal','ID Transaksi','Items'] != dataset.headers[:3]:
+            return render(request, 'index.html', {'error_message': 'Format data tabel excel salah.'})
+
 
         result = calculate_apriori(df=preview_data.export(
             "df"), support=int(getsupport), confidence=int(getconfidence))
+        
 
-        return render(request, '_result.html', {'preview_data': preview_data, 'result_apriori': result, 'support': getsupport, 'confidence': getconfidence})
+        return render(request, '_result.html', {'preview_data': preview_data, 'preview_head': result.head(2),'result_apriori': result, 'support': getsupport, 'confidence': getconfidence})
