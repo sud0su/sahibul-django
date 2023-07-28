@@ -16,6 +16,7 @@ def calculate_apriori(df, support, confidence):
         for j in records[i][0]:
             trx[i].append(j)
 
+    print(records)
 
     association_rules = list(apriori(trx, min_support=float(support/100), min_confidence=float(confidence/100), min_lift=1))
     association_results = association_rules
